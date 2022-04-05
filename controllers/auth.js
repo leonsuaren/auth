@@ -37,8 +37,16 @@ exports.login = async (req, res, next) => {
       res.status(404).json({success: false, error: "Invalid credentials"});
     }
 
-  } catch (error) {
+    const isMatch = await user.matchPasswords(password);
 
+    if(!isMatch) {
+      res.status(404).json({success: false, error: "Invalid credentials"})
+    }
+
+    res.status(200).json({success: true, token: "sdfwerwe23df"})
+
+  } catch (error) {
+    res.status(500).json({success: false, error: error.message});
   }
 
 }
