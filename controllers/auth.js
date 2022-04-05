@@ -10,10 +10,11 @@ exports.register = async (req, res, next) => {
       username, email, password
     });
 
-    res.status(201).json({
-      success: true,
-      user
-    });
+    sendToken(user, 201, res); //lo mismo que abajo solo que se creo la funsion sendToken
+    // res.status(201).json({
+    //   success: true,
+    //   token: "erwqrsdf3r"
+    // });
 
   } catch (error) {
     next(error); //error coming from the middleware
@@ -48,7 +49,8 @@ exports.login = async (req, res, next) => {
       // res.status(404).json({success: false, error: "Invalid credentials"})
     }
 
-    res.status(200).json({success: true, token: "sdfwerwe23df"})
+    sendToken(user, 200, res);
+    // res.status(200).json({success: true, token: "sdfwerwe23df"})
 
   } catch (error) {
     res.status(500).json({success: false, error: error.message});
@@ -62,4 +64,9 @@ exports.forgotpassword = (req, res, next) => {
 
 exports.resetpassword = (req, res, next) => {
   res.send("Reset Password Password route");
+}
+
+const sendToken = (user,statusCode, res) => {
+  const token = user.getSignedToken();
+  res.status(statusCode).json({success: true, token});
 }
