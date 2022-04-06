@@ -41,7 +41,7 @@ export const ResetPasswordScreen = () => {
       );
         console.log(data)
       setSuccess(data.data);
-      navigate('/login');
+      // navigate('/login');
     } catch (error) {
       setError(error.response.data.error);
       setTimeout(() => {
