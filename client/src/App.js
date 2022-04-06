@@ -10,9 +10,16 @@ import { ResetPasswordScreen } from './components/screens/ResetPasswordScreen'
 const App = () => {
   return (
     <Router>
-      <div classNamze="App">
+      <div className="App">
         <Routes>
-          <PrivateRoute path='/' element={<PrivateScreen />} />
+          <Route 
+          path='/'
+          element={
+            <PrivateRoute>
+              <PrivateScreen />
+            </PrivateRoute>
+          }
+          />
           <Route path='/login' element={<LoginScreen />} />
           <Route path='/register' element={<RegisterScreen />} />
           <Route path='/forgotpassword' element={<ForgotPasswordScreen />} />
