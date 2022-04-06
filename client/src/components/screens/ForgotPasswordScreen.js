@@ -1,11 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
 import "./ForgotPasswordScreen.css";
+import { useNavigate } from 'react-router-dom';
 
 export const ForgotPasswordScreen = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const navigator = useNavigate();
 
   const forgotPasswordHandler = async (e) => {
     e.preventDefault();
@@ -23,7 +25,13 @@ export const ForgotPasswordScreen = () => {
         config
       );
 
+      console.log(data);
+
       setSuccess(data.data);
+      setTimeout(() => {
+        navigator(`/passwordreset/${data.resetToken}`);
+      }, 5000);
+
     } catch (error) {
       setError(error.response.data.error);
       setEmail("");

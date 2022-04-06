@@ -41,9 +41,8 @@ export const RegisterScreen = ({ history }) => {
         },
         config
       );
-      console.log(data);
 
-      // localStorage.setItem("authToken", data.token);
+      // localStorage.setItem("authToken", data.token); //instead of save to local storage and login actomaticly, the user is redirect to login screen
 
       navigate("/login");
     } catch (error) {
