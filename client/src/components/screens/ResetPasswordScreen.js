@@ -1,16 +1,17 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import "./ResetPasswordScreen.css";
 
-export const ResetPasswordScreen = ({ match }) => {
+export const ResetPasswordScreen = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
+  const params = useParams();
 
   const resetPasswordHandler = async (e) => {
     e.preventDefault();
@@ -32,13 +33,13 @@ export const ResetPasswordScreen = ({ match }) => {
 
     try {
       const { data } = await axios.put(
-        `/api/auth/passwordreset/${match.params.resetToken}`,
+        `/api/auth/resetpassword/${params.resetToken}`,
         {
           password,
         },
         config
       );
-
+        console.log(data)
       setSuccess(data.data);
       navigate('/login');
     } catch (error) {

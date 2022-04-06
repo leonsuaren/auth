@@ -25,8 +25,6 @@ export const ForgotPasswordScreen = () => {
         config
       );
 
-      console.log(data);
-
       setSuccess(data.data);
       setTimeout(() => {
         navigator(`/passwordreset/${data.resetToken}`);
