@@ -37,7 +37,7 @@ exports.login = async (req, res, next) => {
   }
 
   try {
-    const user = await User.findOne({ email }).select("+password");
+    const user = await User.findOne({ email }).select("+password"); //method select include or exclude a field from findOne, in this case "+password" include the password with the - would exclude the password
 
     if(!user) {
       return next(new ErrorResponse("Invalid credentials"), 401)
@@ -93,7 +93,7 @@ exports.forgotpassword = async (req, res, next) => {
         text: message,
       });
 
-      res.status(200).json({ success: true, data: "Email Sent" });
+      res.status(200).json({ success: true, data: "Email Sent", resetToken: resetToken });
     } catch (err) {
 
       user.resetPasswordToken = undefined;
