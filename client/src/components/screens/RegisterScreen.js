@@ -41,10 +41,11 @@ export const RegisterScreen = ({ history }) => {
         },
         config
       );
+      console.log(data);
 
-      localStorage.setItem("authToken", data.token);
+      // localStorage.setItem("authToken", data.token);
 
-      navigate("/");
+      navigate("/login");
     } catch (error) {
       setError(error.response.data.error);
       setTimeout(() => {
